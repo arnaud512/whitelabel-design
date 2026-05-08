@@ -1,0 +1,47 @@
+# deps
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# next.js
+.next/
+out/
+build/
+
+# misc
+.DS_Store
+*.pem
+.env*
+!.env.example
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# playwright
+test-results/
+playwright-report/
+playwright/.cache/
+.playwright-mcp/
+
+# local design screenshots from verify-build
+*.png
+!public/**/*.png
+
+# parallel-variations worktrees (created by the skill — keep tree clean)
+.worktrees/
+
+# Regenerable Apple assets — see README "SF Pro & SF Symbols setup"
+public/fonts/
+public/sf-symbols/
