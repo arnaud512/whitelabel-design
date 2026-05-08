@@ -4,6 +4,62 @@ A drop-in resource pack for Claude Code that gives you everything Claude Design 
 
 The pack is six skills, an MCP config, a `CLAUDE.md`, and a permission allowlist. Drop them in, and Claude Code auto-loads them. There's nothing else to wire up.
 
+## Getting started
+
+This workspace uses **pnpm** as its package manager (a `pnpm-lock.yaml` is checked in — don't mix with `npm` or `yarn`).
+
+```bash
+# 1. Install pnpm if you don't have it (one-off)
+corepack enable
+corepack prepare pnpm@latest --activate
+# or: brew install pnpm
+
+# 2. Install dependencies
+pnpm install
+
+# 3. Start the dev server (http://localhost:3003)
+pnpm dev
+```
+
+Other scripts:
+
+```bash
+pnpm build       # production build
+pnpm start       # serve the production build
+pnpm lint        # next lint
+pnpm typecheck   # tsc --noEmit
+```
+
+Adding / removing dependencies:
+
+```bash
+pnpm add <pkg>           # runtime dep
+pnpm add -D <pkg>        # dev dep
+pnpm remove <pkg>
+```
+
+To install shadcn components, prefer the shadcn MCP (`mcp__shadcn__*` tools inside Claude Code) over `pnpm dlx shadcn add` — it picks the right registry and respects the existing component layout.
+
+## Using the workspace
+
+The workspace is a Figma-style canvas for ideating UI in real code. Two parallel tracks live side by side:
+
+- **Phone canvas** — `app/reference/<page>/` and `app/prototypes/<page>/`, wrapped in `<PageShell>`. iOS-style liquid-glass is the default visual register.
+- **Web canvas** — `app/web/<page>/`, wrapped in `<WebShell>`. Marketing/landing pages with desktop / 13″ / iPhone viewports and an optional browser-chrome frame.
+
+Every page declares an array of **Screens** (phone tiles), and each screen owns its own **Scenarios** (named pre-baked worlds, e.g. "Empty", "Loading") and **Tweaks** (live knobs that mutate part of the state). Selection, scenarios, and tweaks are all reflected in the URL — share a link and you share the exact state.
+
+Typical flow:
+
+1. `pnpm dev` and open `http://localhost:3003`.
+2. Drop a new page under `app/reference/<page>/page.tsx` (or `app/web/<page>/`) and declare its `screens` array.
+3. Use the right-side **Inspector** to live-edit, zoom, switch scenarios, and toggle tweaks.
+4. Iterate visually, then hand off to native code (e.g. SwiftUI via the `swiftui-handoff` skill).
+
+For the full mental model — Page · Screen · Scenario · Tweak, design tokens, glass recipes, anti-slop rules — see `CLAUDE.md`. It's auto-loaded by Claude Code on every turn, so Claude already knows the conventions; this section is the human-facing summary.
+
+Browse all SF Symbols at `http://localhost:3003/sf-symbols` once you've completed the SF Symbols setup at the bottom of this file.
+
 ## What's inside
 
 ```
